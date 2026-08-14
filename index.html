@@ -123,7 +123,6 @@
     </div>
   </header>
 
-  <!-- Barre de sélection des projets -->
   <div class="project-bar">
     <label for="projectSelect">Projet actif :</label>
     <select id="projectSelect" onchange="switchProject()"></select>
@@ -131,7 +130,6 @@
     <button class="btn-danger" style="padding: 6px 10px; font-size:0.75rem;" onclick="deleteCurrentProject()">Supprimer ce projet</button>
   </div>
 
-  <!-- Section Crédit Immobilier -->
   <div class="card">
     <div class="card-title">Crédit immobilier (projet actif)</div>
     <div class="credit-inputs">
@@ -152,7 +150,6 @@
     </div>
   </div>
 
-  <!-- Résumé Financier -->
   <div class="stats-grid card" style="margin-bottom: 20px;">
     <div class="stat-box">
       <span>Total des factures</span>
@@ -172,11 +169,9 @@
     </div>
   </div>
 
-  <!-- Tableau des Achats -->
   <div class="card">
-    <!-- Barre de recherche et sous-total -->
     <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="🔍 Rechercher un achat ou un magasin..." oninput="renderTable()">
+      <input type="text" id="searchInput" placeholder="🔍 Rechercher un achat, magasin ou N° de facture..." oninput="renderTable()">
       <div class="search-summary" id="searchSummary"></div>
     </div>
 
@@ -201,7 +196,6 @@
   </div>
 </div>
 
-<!-- Modal Ajout/Modification d'Achat -->
 <div class="modal" id="purchaseModal">
   <div class="modal-content">
     <h3 id="modalTitle">Modifier l'achat</h3>
@@ -212,10 +206,15 @@
         <datalist id="descriptionSuggestions"></datalist>
       </div>
 
-      <div class="input-group full">
+      <div class="input-group">
         <label>Entreprise</label>
         <input type="text" id="itemCompany" list="companySuggestions" placeholder="ex: Leroy Merlin">
         <datalist id="companySuggestions"></datalist>
+      </div>
+
+      <div class="input-group">
+        <label>N° Devis / Facture</label>
+        <input type="text" id="itemReference" placeholder="ex: FAC-2026-08">
       </div>
 
       <div class="input-group">
@@ -255,7 +254,6 @@
   </div>
 </div>
 
-<!-- SDK Firebase & Logique de Synchronisation -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -280,21 +278,21 @@
         name: "Maison Tregunc",
         credit: 149804,
         purchases: [
-          { id: 1, name: "Agence Immo", company: "", date: "2026-06-22", deposit: 0, depositPaid: false, total: 8828.00, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 2, name: "Notaire", company: "", date: "2026-06-22", deposit: 0, depositPaid: false, total: 8200.00, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 3, name: "maison Tregunc", company: "", date: "2026-06-22", deposit: 0, depositPaid: false, total: 85000.00, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 4, name: "materiels / fournitures travaux remorque", company: "Leroy Merlin", date: "2026-06-26", deposit: 0, depositPaid: false, total: 105.90, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 5, name: "materiels/fournitures", company: "Leroy Merlin", date: "2026-06-28", deposit: 0, depositPaid: false, total: 11.85, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 6, name: "fenêtres/porte", company: "Jaffry menuiserie", date: "2026-06-30", deposit: 2561.88, depositPaid: true, total: 6404.72, refund: 0, refundDetail: "", fullPaid: false },
-          { id: 7, name: "materiels / fournitures travaux Tregunc", company: "Leroy Merlin", date: "2026-07-11", deposit: 0, depositPaid: false, total: 68.68, refund: 39.90, refundDetail: "retour cable 3G6mm² le 27/07/26", fullPaid: true },
-          { id: 8, name: "materiels / fournitures travaux Tregunc", company: "Leroy Merlin", date: "2026-07-11", deposit: 0, depositPaid: false, total: 28.89, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 9, name: "pose velux", company: "BZH Qualité", date: "2026-07-17", deposit: 779.46, depositPaid: true, total: 2598.20, refund: 0, refundDetail: "", fullPaid: false },
-          { id: 10, name: "traitement charpente", company: "BZH Qualité", date: "2026-07-17", deposit: 252.45, depositPaid: true, total: 841.50, refund: 0, refundDetail: "", fullPaid: false },
-          { id: 11, name: "Mise en securité Electrique", company: "Cariou Christian Auto entrepreneur", date: "2026-07-26", deposit: 315.00, depositPaid: true, total: 500.00, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 12, name: "materiels / fournitures travaux", company: "Brico Cash", date: "2026-08-10", deposit: 0, depositPaid: false, total: 128.70, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 13, name: "materiels / fournitures travaux Tregunc", company: "Leroy Merlin", date: "2026-08-10", deposit: 0, depositPaid: false, total: 1262.29, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 14, name: "materiels / fournitures travaux Tregunc", company: "Leroy Merlin", date: "2026-08-11", deposit: 0, depositPaid: false, total: 52.36, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 15, name: "Materiels / fournitures travaux Tregunc", company: "Leroy Merlin", date: "2026-08-12", deposit: 0, depositPaid: false, total: 86.78, refund: 0, refundDetail: "", fullPaid: true }
+          { id: 1, name: "Agence Immo", company: "", reference: "", date: "2026-06-22", deposit: 0, depositPaid: false, total: 8828.00, refund: 0, refundDetail: "", fullPaid: true },
+          { id: 2, name: "Notaire", company: "", reference: "", date: "2026-06-22", deposit: 0, depositPaid: false, total: 8200.00, refund: 0, refundDetail: "", fullPaid: true },
+          { id: 3, name: "maison Tregunc", company: "", reference: "", date: "2026-06-22", deposit: 0, depositPaid: false, total: 85000.00, refund: 0, refundDetail: "", fullPaid: true },
+          { id: 4, name: "materiels / fournitures travaux remorque", company: "Leroy Merlin", reference: "", date: "2026-06-26", deposit: 0, depositPaid: false, total: 105.90, refund: 0, refundDetail: "", fullPaid: true },
+          { id: 5, name: "materiels/fournitures", company: "Leroy Merlin", reference: "", date: "2026-06-28", deposit: 0, depositPaid: false, total: 11.85, refund: 0, refundDetail: "", fullPaid: true },
+          { id: 6, name: "fenêtres/porte", company: "Jaffry menuiserie", reference: "", date: "2026-06-30", deposit: 2561.88, depositPaid: true, total: 6404.72, refund: 0, refundDetail: "", fullPaid: false },
+          { id: 7, name: "materiels / fournitures travaux Tregunc", company: "Leroy Merlin", reference: "", date: "2026-07-11", deposit: 0, depositPaid: false, total: 68.68, refund: 39.90, refundDetail: "retour cable 3G6mm² le 27/07/26", fullPaid: true },
+          { id: 8, name: "materiels / fournitures travaux Tregunc", company: "Leroy Merlin", reference: "", date: "2026-07-11", deposit: 0, depositPaid: false, total: 28.89, refund: 0, refundDetail: "", fullPaid: true },
+          { id: 9, name: "pose velux", company: "BZH Qualité", reference: "", date: "2026-07-17", deposit: 779.46, depositPaid: true, total: 2598.20, refund: 0, refundDetail: "", fullPaid: false },
+          { id: 10, name: "traitement charpente", company: "BZH Qualité", reference: "", date: "2026-07-17", deposit: 252.45, depositPaid: true, total: 841.50, refund: 0, refundDetail: "", fullPaid: false },
+          { id: 11, name: "Mise en securité Electrique", company: "Cariou Christian Auto entrepreneur", reference: "", date: "2026-07-26", deposit: 315.00, depositPaid: true, total: 500.00, refund: 0, refundDetail: "", fullPaid: true },
+          { id: 12, name: "materiels / fournitures travaux", company: "Brico Cash", reference: "", date: "2026-08-10", deposit: 0, depositPaid: false, total: 128.70, refund: 0, refundDetail: "", fullPaid: true },
+          { id: 13, name: "materiels / fournitures travaux Tregunc", company: "Leroy Merlin", reference: "", date: "2026-08-10", deposit: 0, depositPaid: false, total: 1262.29, refund: 0, refundDetail: "", fullPaid: true },
+          { id: 14, name: "materiels / fournitures travaux Tregunc", company: "Leroy Merlin", reference: "", date: "2026-08-11", deposit: 0, depositPaid: false, total: 52.36, refund: 0, refundDetail: "", fullPaid: true },
+          { id: 15, name: "Materiels / fournitures travaux Tregunc", company: "Leroy Merlin", reference: "", date: "2026-08-12", deposit: 0, depositPaid: false, total: 86.78, refund: 0, refundDetail: "", fullPaid: true }
         ]
       }
     ]
@@ -303,7 +301,6 @@
   window.appState = JSON.parse(localStorage.getItem('renov_app_state')) || defaultInitialData;
   window.editingPurchaseId = null;
 
-  // Synchro depuis Firebase
   const docRef = doc(db, "app_data", "main_state");
   
   onSnapshot(docRef, (docSnap) => {
@@ -314,7 +311,6 @@
       localStorage.setItem('renov_app_state', JSON.stringify(window.appState));
       render();
     } else {
-      // Premier lancement : envoie des données initiales sur Firebase
       saveData();
     }
   });
@@ -401,7 +397,8 @@
 
     const filteredPurchases = sortedPurchases.filter(p => 
       p.name.toLowerCase().includes(searchTerm) || 
-      (p.company && p.company.toLowerCase().includes(searchTerm))
+      (p.company && p.company.toLowerCase().includes(searchTerm)) ||
+      (p.reference && p.reference.toLowerCase().includes(searchTerm))
     );
 
     let filteredTotalNet = 0;
@@ -412,10 +409,13 @@
       const remaining = p.fullPaid ? 0 : Math.max(0, netTotal - p.deposit);
       const isPaid = p.fullPaid || remaining <= 0.001;
 
+      // Affichage de la référence sous l'entreprise si elle existe
+      const refHtml = p.reference ? `<br><small style="color:#6b7280">Réf: ${p.reference}</small>` : '';
+
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td><strong>${p.name}</strong><br><small style="color:#6b7280">${p.date}</small></td>
-        <td>${p.company || '—'}</td>
+        <td>${p.company || '—'} ${refHtml}</td>
         <td>${p.deposit > 0 ? p.deposit.toFixed(2) + ' €' + (p.depositPaid ? '<br><small class="text-green">✓ Payé</small>' : '') : '0,00 €'}</td>
         <td>${p.total.toFixed(2)} €</td>
         <td>${p.refund > 0 ? p.refund.toFixed(2) + ' €' + (p.refundDetail ? '<br><small style="color:#6b7280">' + p.refundDetail + '</small>' : '') : '0,00 €'}</td>
@@ -477,7 +477,8 @@
       const p = project.purchases.find(item => item.id === id);
       document.getElementById('modalTitle').innerText = "Modifier l'achat";
       document.getElementById('itemName').value = p.name;
-      document.getElementById('itemCompany').value = p.company;
+      document.getElementById('itemCompany').value = p.company || '';
+      document.getElementById('itemReference').value = p.reference || '';
       document.getElementById('itemTotal').value = p.total;
       document.getElementById('itemDeposit').value = p.deposit;
       document.getElementById('itemDepositPaid').checked = p.depositPaid || false;
@@ -489,6 +490,7 @@
       document.getElementById('modalTitle').innerText = "Ajouter un achat";
       document.getElementById('itemName').value = '';
       document.getElementById('itemCompany').value = '';
+      document.getElementById('itemReference').value = '';
       document.getElementById('itemTotal').value = '0';
       document.getElementById('itemDeposit').value = '0';
       document.getElementById('itemDepositPaid').checked = false;
@@ -513,6 +515,7 @@
       id: window.editingPurchaseId || Date.now(),
       name: name,
       company: document.getElementById('itemCompany').value,
+      reference: document.getElementById('itemReference').value,
       total: parseFloat(document.getElementById('itemTotal').value) || 0,
       deposit: parseFloat(document.getElementById('itemDeposit').value) || 0,
       depositPaid: document.getElementById('itemDepositPaid').checked,
