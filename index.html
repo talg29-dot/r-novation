@@ -6,121 +6,121 @@
   <title>Mes travaux de rénovation</title>
   <style>
     :root {
-      --bg-color: #f4f0f5;
-      --card-bg: #ffffff;
-      --text-color: #3c3c50;
-      --primary-color: #111827;
-      --accent-green: #10b981;
-      --accent-orange: #f59e0b;
-      --border-color: #e2e8f0;
+      --couleur-de-fond: #f4f0f5;
+      --carte-bg: #ffffff;
+      --couleur-du-texte: #3c3c50;
+      --couleur-primaire: #111827;
+      --accent-vert: #10b981;
+      --accent-orange: #af5e0b;
+      --couleur-de-bordure: #e2e8f0;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: var(--bg-color); color: var(--text-color); padding: 20px; font-size: 14px; }
-    .container { max-width: 1200px; margin: 0 auto; }
-    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
-    .header-title h1 { font-size: 1.4rem; display: flex; align-items: center; gap: 8px; }
-    .header-title p { color: #6b7280; font-size: 0.85rem; }
-    .header-btns { display: flex; gap: 10px; align-items: center; }
-    button { cursor: pointer; border: none; border-radius: 6px; padding: 8px 14px; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; }
-    .btn-dark { background-color: var(--primary-color); color: white; }
-    .btn-float { background-color: #1f2937; }
-    .btn-outline { background-color: white; border: 1px solid var(--border-color); color: #4b5563; }
-    .btn-danger { background-color: #ef4444; color: white; }
-    
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px; }
-    .stat-card { background: var(--card-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
-    .stat-card span { font-size: 0.75rem; color: #6b7280; font-weight: 600; text-transform: uppercase; }
-    .stat-card .amount { font-size: 1.3rem; font-weight: bold; margin-top: 5px; }
-    .progress-bar { height: 6px; background: #e5e7eb; border-radius: 3px; margin-top: 10px; overflow: hidden; }
-    .progress-fill { height: 100%; background: var(--accent-orange); width: 0%; transition: width 0.3s; }
+    body { background-color: var(--couleur-de-fond); color: var(--couleur-du-texte); padding: 20px; font-size: 14px; }
+    .récipient { max-width: 1200px; margin: 0 auto; }
 
-    .main-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
-    @media (max-width: 850px) { .main-grid { grid-template-columns: 1fr; } }
+    .en-tête { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+    .zone-de-titre h1 { font-size: 1.4rem; display: flex; align-items: center; gap: 8px; }
+    .zone-de-titre p { color: #6b7280; font-size: 0.85rem; }
 
-    .card { background: var(--card-bg); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 20px; }
-    .card h2 { font-size: 1rem; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+    .boutons-d-en-tête { display: flex; gap: 10px; align-items: center; }
+    button { cursor: pointer; border: none; border-radius: 6px; padding: 8px 14px; font-weight: 600; font-size: 0.85rem; transition: arrière-plan 0.2s; }
+    .bouton-foncé { couleur-de-fond: var(--couleur-primaire); couleur: blanc; background-color: var(--couleur-primaire); color: white; }
+    .bouton-flotter { couleur-de-fond: #1f2937; }
+    .contour-du-bouton { couleur-de-fond: blanc; frontière: 1px solid var(--couleur-de-bordure); couleur: #4b5563; background-color: white; border: 1px solid var(--couleur-de-bordure); color: #4b5563; }
+    .bouton-danger { couleur-de-fond: #ef4444; couleur: blanc; background-color: #ef4444; color: white; }
 
-    .form-group { margin-bottom: 12px; }
-    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; color: #4b5563; }
-    .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; }
-    .form-row { display: flex; gap: 10px; }
+    .grille-des-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px; }
+    .carte-stat { background: var(--carte-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--couleur-de-bordure); }
+    .carte-stat span { font-size: 0.75rem; color: #6b7280; font-weight: 600; text-transform: uppercase; }
+    .carte-stat .montant { font-size: 1.3rem; font-weight: bold; margin-top: 5px; }
+    .barre-de-progression { height: 6px; background: #e5e7eb; border-radius: 3px; margin-top: 10px; overflow: hidden; }
+    .remplissage-de-progression { height: 100%; background: var(--accent-orange); width: 0%; transition: width 0.3s; }
 
-    .item-list { list-style: none; }
-    .item-card { border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-    .item-info strong { display: block; font-size: 0.9rem; }
-    .item-info small { color: #6b7280; font-size: 0.75rem; }
-    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; margin-top: 4px; }
-    .badge-reelle { background-color: #d1fae5; color: #065f46; }
-    .badge-estimee { background-color: #fef3c7; color: #92400e; }
+    .grille-principale { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
+    @media (max-width: 850px) { .grille-principale { grid-template-columns: 1fr; } }
 
-    .actions { display: flex; gap: 8px; }
-    .btn-sm { padding: 4px 8px; font-size: 0.75rem; }
+    .carte { background: var(--carte-bg); padding: 20px; border-radius: 8px; border: 1px solid var(--couleur-de-bordure); margin-bottom: 20px; }
+    .carte h2 { font-size: 1rem; margin-bottom: 15px; border-bottom: 1px solid var(--couleur-de-bordure); padding-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
 
-    .sync-status { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; }
-    .status-dot { width: 8px; height: 8px; border-radius: 50%; background-color: #f59e0b; }
-    .status-online { background-color: #10b981; }
+    .groupe-de-formulaires { margin-bottom: 12px; }
+    .groupe-de-formulaires label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; color: #4b5563; }
+    .groupe-de-formulaires input, .groupe-de-formulaires select { width: 100%; padding: 8px; border: 1px solid var(--couleur-de-bordure); border-radius: 6px; font-size: 0.85rem; }
+    .ligne-de-formulaire { display: flex; gap: 10px; }
+
+    .liste-d-articles { list-style: none; }
+    .carte-d-article { border: 1px solid var(--couleur-de-bordure); border-radius: 6px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    .informations-sur-l-article strong { display: block; font-size: 0.9rem; }
+    .informations-sur-l-article small { color: #6b7280; font-size: 0.75rem; }
+    .insigne { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; margin-top: 4px; }
+    .insigne-réelle { background-color: #d1fae5; color: #065f46; }
+    .insigne-estimée { background-color: #fef3c7; color: #92400e; }
+
+    .statut-synchro { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; }
+    .point-statut { width: 8px; height: 8px; border-radius: 50%; background-color: #f59e0b; }
+    .statut-en-ligne { background-color: #10b981; }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <div class="header-title">
+<div class="récipient">
+  <div class="en-tête">
+    <div class="zone-de-titre">
       <h1>🔨 Mes travaux de rénovation</h1>
       <p>Suivi global des dépenses et devis</p>
     </div>
-    <div class="header-btns">
-      <div class="sync-status">
-        <div id="syncDot" class="status-dot"></div>
+    <div class="boutons-d-en-tête">
+      <div class="statut-synchro">
+        <div id="syncDot" class="point-statut"></div>
         <span id="syncText">Connexion...</span>
       </div>
     </div>
-  </header>
+  </div>
 
-  <div class="stats-grid">
-    <div class="stat-card">
-      <span>Budget global défini</span>
-      <div class="amount" id="statBudget">0,00 €</div>
+  <div class="grille-des-stats">
+    <div class="carte-stat">
+      <span>BUDGET GLOBAL DÉFINI</span>
+      <div class="montant" id="statBudget">0,00 €</div>
     </div>
-    <div class="stat-card">
-      <span>Dépenses réelles</span>
-      <div class="amount" id="statReal">0,00 €</div>
-      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="carte-stat">
+      <span>DÉPENSES RÉELLES</span>
+      <div class="montant" id="statReal">0,00 €</div>
+      <div class="barre-de-progression"><div class="remplissage-de-progression" id="progressFill"></div></div>
     </div>
-    <div class="stat-card">
-      <span>Restant théorique</span>
-      <div class="amount" id="statRemaining">0,00 €</div>
+    <div class="carte-stat">
+      <span>RESTANT THÉORIQUE</span>
+      <div class="montant" id="statRemaining">0,00 €</div>
     </div>
   </div>
 
-  <div class="main-grid">
+  <div class="grille-principale">
     <div>
-      <div class="card">
+      <div class="carte">
         <h2>Paramétrer le budget</h2>
-        <div class="form-group">
+        <div class="groupe-de-formulaires">
           <label>Budget total (€)</label>
           <input type="number" id="globalBudgetInput" placeholder="Ex: 50000">
         </div>
-        <button class="btn-dark" onclick="saveBudget()">Enregistrer le budget</button>
+        <button class="bouton-foncé" onclick="saveBudget()">Enregistrer le budget</button>
       </div>
 
-      <div class="card">
+      <div class="carte">
         <h2>Ajouter une ligne</h2>
         <form id="addForm">
-          <div class="form-group">
+          <div class="groupe-de-formulaires">
             <label>Intitulé</label>
             <input type="text" id="itemName" placeholder="Ex: Peinture salon" required>
           </div>
-          <div class="form-group">
+          <div class="groupe-de-formulaires">
             <label>Catégorie / Pièce</label>
             <input type="text" id="itemCategory" placeholder="Ex: Salon, Plomberie..." required>
           </div>
-          <div class="form-row">
-            <div class="form-group" style="flex:1;">
+          <div class="ligne-de-formulaire">
+            <div class="groupe-de-formulaires" style="flex:1;">
               <label>Montant (€)</label>
               <input type="number" step="0.01" id="itemAmount" placeholder="0.00" required>
             </div>
-            <div class="form-group" style="flex:1;">
+            <div class="groupe-de-formulaires" style="flex:1;">
               <label>Type</label>
               <select id="itemType">
                 <option value="reelle">Réelle</option>
@@ -128,15 +128,15 @@
               </select>
             </div>
           </div>
-          <button type="submit" class="btn-dark" style="width:100%;">Ajouter</button>
+          <button type="submit" class="bouton-foncé" style="width:100%;">Ajouter</button>
         </form>
       </div>
     </div>
 
     <div>
-      <div class="card">
+      <div class="carte">
         <h2>Liste des dépenses & estimations</h2>
-        <ul class="item-list" id="itemList">
+        <ul class="liste-d-articles" id="itemList">
           <!-- Les éléments s'affichent ici -->
         </ul>
       </div>
@@ -147,7 +147,7 @@
 <!-- Firebase SDK -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, setDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyBgGKXYVSi1RbZH498K6TASjdJ3sd-ZWI",
@@ -164,6 +164,40 @@
   let globalBudget = 0;
   let items = [];
 
+  // Migration automatique de l'ancien LocalStorage vers Firebase
+  async function migrateOldData() {
+    const oldBudget = localStorage.getItem('globalBudget') || localStorage.getItem('budget');
+    const oldItems = localStorage.getItem('renovationItems') || localStorage.getItem('expenses') || localStorage.getItem('items');
+    
+    if (oldBudget && oldBudget !== "0") {
+      await setDoc(doc(db, "config", "budget"), { amount: parseFloat(oldBudget) });
+      localStorage.removeItem('globalBudget');
+      localStorage.removeItem('budget');
+    }
+
+    if (oldItems) {
+      try {
+        const parsed = JSON.parse(oldItems);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          for (const item of parsed) {
+            await addDoc(collection(db, "expenses"), {
+              name: item.name || item.intitule || "Sans nom",
+              category: item.category || item.categorie || "Général",
+              amount: parseFloat(item.amount || item.montant || 0),
+              type: item.type || "reelle",
+              date: item.date || new Date().toISOString()
+            });
+          }
+        }
+        localStorage.removeItem('renovationItems');
+        localStorage.removeItem('expenses');
+        localStorage.removeItem('items');
+      } catch(e) { console.error("Erreur migration", e); }
+    }
+  }
+
+  migrateOldData();
+
   // Écoute synchro
   onSnapshot(doc(db, "config", "budget"), (docSnap) => {
     if (docSnap.exists()) {
@@ -174,7 +208,7 @@
   });
 
   onSnapshot(collection(db, "expenses"), (snapshot) => {
-    document.getElementById('syncDot').classList.add('status-online');
+    document.getElementById('syncDot').classList.add('statut-en-ligne');
     document.getElementById('syncText').textContent = "Synchronisé";
     
     items = [];
@@ -217,18 +251,18 @@
       if (item.type === 'reelle') totalReal += item.amount;
 
       const li = document.createElement('li');
-      li.className = 'item-card';
+      li.className = 'carte-d-article';
       li.innerHTML = `
-        <div class="item-info">
+        <div class="informations-sur-l-article">
           <strong>${item.name}</strong>
           <small>${item.category}</small><br>
-          <span class="badge ${item.type === 'reelle' ? 'badge-reelle' : 'badge-estimee'}">
+          <span class="insigne ${item.type === 'reelle' ? 'insigne-réelle' : 'insigne-estimée'}">
             ${item.type === 'reelle' ? 'Dépense réelle' : 'Estimation'}
           </span>
         </div>
         <div style="text-align:right;">
           <div style="font-weight:bold; font-size:1rem;">${item.amount.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}</div>
-          <button class="btn-danger btn-sm" style="margin-top:5px;" onclick="deleteItem('${item.id}')">Supprimer</button>
+          <button class="bouton-danger" style="padding: 4px 8px; font-size: 0.75rem; margin-top:5px;" onclick="deleteItem('${item.id}')">Supprimer</button>
         </div>
       `;
       listEl.appendChild(li);
