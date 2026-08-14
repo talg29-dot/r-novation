@@ -6,504 +6,244 @@
   <title>Mes travaux de rénovation</title>
   <style>
     :root {
-      --bg-color: #f4f6f8;
+      --bg-color: #f4f0f5;
       --card-bg: #ffffff;
-      --text-color: #2c3e50;
+      --text-color: #3c3c50;
       --primary-color: #111827;
       --accent-green: #10b981;
       --accent-orange: #f59e0b;
-      --border-color: #e5e7eb;
+      --border-color: #e2e8f0;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body { background-color: var(--bg-color); color: var(--text-color); padding: 20px; font-size: 14px; }
     .container { max-width: 1200px; margin: 0 auto; }
-
     header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
-    .title-area h1 { font-size: 1.4rem; display: flex; align-items: center; gap: 8px; }
-    .title-area p { color: #6b7280; font-size: 0.85rem; }
-
-    .header-buttons { display: flex; gap: 10px; align-items: center; }
+    .header-title h1 { font-size: 1.4rem; display: flex; align-items: center; gap: 8px; }
+    .header-title p { color: #6b7280; font-size: 0.85rem; }
+    .header-btns { display: flex; gap: 10px; align-items: center; }
     button { cursor: pointer; border: none; border-radius: 6px; padding: 8px 14px; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; }
     .btn-dark { background-color: var(--primary-color); color: white; }
-    .btn-dark:hover { background-color: #1f2937; }
-    .btn-outline { background-color: white; border: 1px solid var(--border-color); color: #374151; }
-    .btn-outline:hover { background-color: #f9fafb; }
+    .btn-float { background-color: #1f2937; }
+    .btn-outline { background-color: white; border: 1px solid var(--border-color); color: #4b5563; }
     .btn-danger { background-color: #ef4444; color: white; }
-
-    .project-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; background: white; padding: 12px 18px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); flex-wrap: wrap; }
-    .project-bar label { font-weight: 700; color: #374151; }
-    .project-bar select { font-weight: 600; padding: 6px 12px; }
-
-    .card { background: var(--card-bg); border-radius: 10px; padding: 18px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-    .card-title { font-size: 1rem; font-weight: 700; margin-bottom: 12px; }
-
-    .credit-inputs { display: flex; gap: 15px; align-items: center; flex-wrap: wrap; }
-    .input-group { display: flex; flex-direction: column; gap: 4px; }
-    .input-group label { font-size: 0.75rem; color: #6b7280; font-weight: 600; }
-    input[type="number"], input[type="text"], input[type="date"], select { padding: 8px 10px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.9rem; }
     
-    .search-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
-    .search-bar input { flex: 1; max-width: 350px; }
-    .search-summary { font-size: 0.85rem; color: #6b7280; font-weight: 600; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px; }
+    .stat-card { background: var(--card-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
+    .stat-card span { font-size: 0.75rem; color: #6b7280; font-weight: 600; text-transform: uppercase; }
+    .stat-card .amount { font-size: 1.3rem; font-weight: bold; margin-top: 5px; }
+    .progress-bar { height: 6px; background: #e5e7eb; border-radius: 3px; margin-top: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--accent-orange); width: 0%; transition: width 0.3s; }
 
-    .checkbox-group { display: flex; gap: 20px; align-items: center; margin-top: 10px; }
-    .checkbox-group label { font-size: 0.85rem; font-weight: 600; color: #374151; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .main-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
+    @media (max-width: 850px) { .main-grid { grid-template-columns: 1fr; } }
 
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; }
-    .stat-box { background: #f9fafb; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); }
-    .stat-box span { display: block; font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
-    .stat-box strong { font-size: 1.2rem; }
-    .text-green { color: var(--accent-green); }
-    .text-orange { color: var(--accent-orange); }
+    .card { background: var(--card-bg); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 20px; }
+    .card h2 { font-size: 1rem; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
 
-    .table-container { 
-      max-height: 500px; 
-      overflow-y: auto; 
-      overflow-x: auto; 
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-    }
-    table { width: 100%; border-collapse: collapse; text-align: left; }
-    
-    th { 
-      position: sticky; 
-      top: 0; 
-      background: #f9fafb; 
-      padding: 12px 10px; 
-      font-size: 0.8rem; 
-      color: #6b7280; 
-      border-bottom: 2px solid var(--border-color); 
-      z-index: 10;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    }
-    
-    td { padding: 12px 10px; border-bottom: 1px solid var(--border-color); font-size: 0.85rem; }
-    
-    .badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
-    .badge-paid { background-color: #d1fae5; color: #065f46; }
-    .badge-pending { background-color: #fef3c7; color: #92400e; }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; color: #4b5563; }
+    .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; }
+    .form-row { display: flex; gap: 10px; }
 
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 100; }
-    .modal-content { background: white; padding: 20px; border-radius: 10px; width: 90%; max-width: 520px; }
-    .modal-content h3 { margin-bottom: 15px; }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-    .form-grid .full { grid-column: span 2; }
-    .modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
+    .item-list { list-style: none; }
+    .item-card { border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    .item-info strong { display: block; font-size: 0.9rem; }
+    .item-info small { color: #6b7280; font-size: 0.75rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; margin-top: 4px; }
+    .badge-reelle { background-color: #d1fae5; color: #065f46; }
+    .badge-estimee { background-color: #fef3c7; color: #92400e; }
 
-    /* Styles d'impression */
-    @media print {
-      body { background-color: white; padding: 0; }
-      .header-buttons, .project-bar button, .search-bar, td:last-child, th:last-child { display: none !important; }
-      .card { box-shadow: none; border: 1px solid #ccc; margin-bottom: 10px; }
-      .table-container { max-height: none; overflow: visible; border: none; }
-      th { position: static; background: #eee; }
-    }
+    .actions { display: flex; gap: 8px; }
+    .btn-sm { padding: 4px 8px; font-size: 0.75rem; }
+
+    .sync-status { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background-color: #f59e0b; }
+    .status-online { background-color: #10b981; }
   </style>
 </head>
 <body>
 
 <div class="container">
   <header>
-    <div class="title-area">
+    <div class="header-title">
       <h1>🔨 Mes travaux de rénovation</h1>
-      <p>Suivi des achats, dépenses et crédit immobilier</p>
+      <p>Suivi global des dépenses et devis</p>
     </div>
-    <div class="header-buttons">
-      <button class="btn-outline" onclick="window.print()">🖨️ Imprimer / PDF</button>
-      <button class="btn-outline" onclick="exportData()">💾 Sauvegarder</button>
-      <button class="btn-dark" onclick="openModal()">+ Nouvel achat</button>
+    <div class="header-btns">
+      <div class="sync-status">
+        <div id="syncDot" class="status-dot"></div>
+        <span id="syncText">Connexion...</span>
+      </div>
     </div>
   </header>
 
-  <!-- Barre de sélection des projets -->
-  <div class="project-bar">
-    <label for="projectSelect">Projet actif :</label>
-    <select id="projectSelect" onchange="switchProject()"></select>
-    <button class="btn-outline" onclick="addNewProject()">+ Nouveau projet</button>
-    <button class="btn-danger" style="padding: 6px 10px; font-size:0.75rem;" onclick="deleteCurrentProject()">Supprimer ce projet</button>
-  </div>
-
-  <!-- Section Crédit Immobilier -->
-  <div class="card">
-    <div class="card-title">Crédit immobilier (projet actif)</div>
-    <div class="credit-inputs">
-      <div class="input-group">
-        <label>Montant du crédit souscrit (€)</label>
-        <input type="number" id="creditAmount" value="149804" oninput="updateCreditAmount()">
-      </div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span>Budget global défini</span>
+      <div class="amount" id="statBudget">0,00 €</div>
     </div>
-    <div class="stats-grid">
-      <div class="stat-box">
-        <span>Total dépensé (net)</span>
-        <strong id="totalSpent">0,00 €</strong>
-      </div>
-      <div class="stat-box">
-        <span>Crédit restant</span>
-        <strong id="creditRemaining" class="text-green">0,00 €</strong>
-      </div>
+    <div class="stat-card">
+      <span>Dépenses réelles</span>
+      <div class="amount" id="statReal">0,00 €</div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+    <div class="stat-card">
+      <span>Restant théorique</span>
+      <div class="amount" id="statRemaining">0,00 €</div>
     </div>
   </div>
 
-  <!-- Résumé Financier -->
-  <div class="stats-grid card" style="margin-bottom: 20px;">
-    <div class="stat-box">
-      <span>Total des factures</span>
-      <strong id="totalInvoices">0,00 €</strong>
-    </div>
-    <div class="stat-box">
-      <span>Acomptes versés</span>
-      <strong id="totalDeposits">0,00 €</strong>
-    </div>
-    <div class="stat-box">
-      <span>Reste à payer</span>
-      <strong id="totalRemaining" class="text-orange">0,00 €</strong>
-    </div>
-    <div class="stat-box">
-      <span>Remboursements / retours</span>
-      <strong id="totalRefunds">0,00 €</strong>
-    </div>
-  </div>
+  <div class="main-grid">
+    <div>
+      <div class="card">
+        <h2>Paramétrer le budget</h2>
+        <div class="form-group">
+          <label>Budget total (€)</label>
+          <input type="number" id="globalBudgetInput" placeholder="Ex: 50000">
+        </div>
+        <button class="btn-dark" onclick="saveBudget()">Enregistrer le budget</button>
+      </div>
 
-  <!-- Tableau des Achats -->
-  <div class="card">
-    <!-- Barre de recherche et sous-total -->
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="🔍 Rechercher un achat ou un magasin..." oninput="renderTable()">
-      <div class="search-summary" id="searchSummary"></div>
+      <div class="card">
+        <h2>Ajouter une ligne</h2>
+        <form id="addForm">
+          <div class="form-group">
+            <label>Intitulé</label>
+            <input type="text" id="itemName" placeholder="Ex: Peinture salon" required>
+          </div>
+          <div class="form-group">
+            <label>Catégorie / Pièce</label>
+            <input type="text" id="itemCategory" placeholder="Ex: Salon, Plomberie..." required>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="flex:1;">
+              <label>Montant (€)</label>
+              <input type="number" step="0.01" id="itemAmount" placeholder="0.00" required>
+            </div>
+            <div class="form-group" style="flex:1;">
+              <label>Type</label>
+              <select id="itemType">
+                <option value="reelle">Réelle</option>
+                <option value="estimee">Estimée</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn-dark" style="width:100%;">Ajouter</button>
+        </form>
+      </div>
     </div>
 
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Achat</th>
-            <th>Entreprise</th>
-            <th>Acompte</th>
-            <th>Facture totale</th>
-            <th>Remboursement</th>
-            <th>Total net</th>
-            <th>Reste à payer</th>
-            <th>Acquittée</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="purchasesTable"></tbody>
-      </table>
+    <div>
+      <div class="card">
+        <h2>Liste des dépenses & estimations</h2>
+        <ul class="item-list" id="itemList">
+          <!-- Les éléments s'affichent ici -->
+        </ul>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Modal Ajout/Modification d'Achat -->
-<div class="modal" id="purchaseModal">
-  <div class="modal-content">
-    <h3 id="modalTitle">Modifier l'achat</h3>
-    <div class="form-grid">
-      <div class="input-group full">
-        <label>Achat *</label>
-        <input type="text" id="itemName" list="descriptionSuggestions" placeholder="ex: Agence Immo">
-        <datalist id="descriptionSuggestions"></datalist>
-      </div>
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-      <div class="input-group full">
-        <label>Entreprise</label>
-        <input type="text" id="itemCompany" list="companySuggestions" placeholder="ex: Leroy Merlin">
-        <datalist id="companySuggestions"></datalist>
-      </div>
-
-      <div class="input-group">
-        <label>Facture d'acompte (€)</label>
-        <input type="number" id="itemDeposit" step="0.01" value="0">
-      </div>
-
-      <div class="input-group">
-        <label>Facture totale (€)</label>
-        <input type="number" id="itemTotal" step="0.01" value="0">
-      </div>
-
-      <div class="input-group">
-        <label>Remboursement / retour (€)</label>
-        <input type="number" id="itemRefund" step="0.01" value="0">
-      </div>
-
-      <div class="input-group">
-        <label>Date d'achat</label>
-        <input type="date" id="itemDate">
-      </div>
-
-      <div class="input-group full">
-        <label>Détail remboursement / retour</label>
-        <input type="text" id="itemRefundDetail" placeholder="ex: retour cable 3G6mm² le 27/07/26">
-      </div>
-
-      <div class="checkbox-group full">
-        <label><input type="checkbox" id="itemDepositPaid"> Acompte payé</label>
-        <label><input type="checkbox" id="itemFullPaid"> Solde payé</label>
-      </div>
-    </div>
-    <div class="modal-actions">
-      <button class="btn-outline" onclick="closeModal()">Annuler</button>
-      <button class="btn-dark" onclick="savePurchase()">Enregistrer</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  const defaultInitialData = {
-    activeProjectId: "tregunc",
-    projects: [
-      {
-        id: "tregunc",
-        name: "Maison Tregunc",
-        credit: 149804,
-        purchases: [
-          { id: 1, name: "Agence Immo", company: "", date: "2026-06-22", deposit: 0, depositPaid: false, total: 8828.00, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 2, name: "Notaire", company: "", date: "2026-06-22", deposit: 0, depositPaid: false, total: 8200.00, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 3, name: "maison Tregunc", company: "", date: "2026-06-22", deposit: 0, depositPaid: false, total: 85000.00, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 4, name: "materiels / fournitures travaux remorque", company: "Leroy Merlin", date: "2026-06-26", deposit: 0, depositPaid: false, total: 105.90, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 5, name: "materiels/fournitures", company: "Leroy Merlin", date: "2026-06-28", deposit: 0, depositPaid: false, total: 11.85, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 6, name: "fenêtres/porte", company: "Jaffry menuiserie", date: "2026-06-30", deposit: 2561.88, depositPaid: true, total: 6404.72, refund: 0, refundDetail: "", fullPaid: false },
-          { id: 7, name: "materiels / fournitures travaux Tregunc", company: "Leroy Merlin", date: "2026-07-11", deposit: 0, depositPaid: false, total: 68.68, refund: 39.90, refundDetail: "retour cable 3G6mm² le 27/07/26", fullPaid: true },
-          { id: 8, name: "materiels / fournitures travaux Tregunc", company: "Leroy Merlin", date: "2026-07-11", deposit: 0, depositPaid: false, total: 28.89, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 9, name: "pose velux", company: "BZH Qualité", date: "2026-07-17", deposit: 779.46, depositPaid: true, total: 2598.20, refund: 0, refundDetail: "", fullPaid: false },
-          { id: 10, name: "traitement charpente", company: "BZH Qualité", date: "2026-07-17", deposit: 252.45, depositPaid: true, total: 841.50, refund: 0, refundDetail: "", fullPaid: false },
-          { id: 11, name: "Mise en securité Electrique", company: "Cariou Christian Auto entrepreneur", date: "2026-07-26", deposit: 315.00, depositPaid: true, total: 500.00, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 12, name: "materiels / fournitures travaux", company: "Brico Cash", date: "2026-08-10", deposit: 0, depositPaid: false, total: 128.70, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 13, name: "materiels / fournitures travaux Tregunc", company: "Leroy Merlin", date: "2026-08-10", deposit: 0, depositPaid: false, total: 1262.29, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 14, name: "materiels / fournitures travaux Tregunc", company: "Leroy Merlin", date: "2026-08-11", deposit: 0, depositPaid: false, total: 52.36, refund: 0, refundDetail: "", fullPaid: true },
-          { id: 15, name: "Materiels / fournitures travaux Tregunc", company: "Leroy Merlin", date: "2026-08-12", deposit: 0, depositPaid: false, total: 86.78, refund: 0, refundDetail: "", fullPaid: true }
-        ]
-      }
-    ]
+  const firebaseConfig = {
+    apiKey: "AIzaSyBgGKXYVSi1RbZH498K6TASjdJ3sd-ZWI",
+    authDomain: "renovation-maison-f6067.firebaseapp.com",
+    projectId: "renovation-maison-f6067",
+    storageBucket: "renovation-maison-f6067.firebasestorage.app",
+    messagingSenderId: "562445834331",
+    appId: "1:562445834331:web:e5ead196bb361dc77d707e"
   };
 
-  let appState = JSON.parse(localStorage.getItem('renov_app_state')) || defaultInitialData;
-  let editingPurchaseId = null;
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-  function getCurrentProject() {
-    return appState.projects.find(p => p.id === appState.activeProjectId) || appState.projects[0];
-  }
+  let globalBudget = 0;
+  let items = [];
 
-  function saveData() {
-    localStorage.setItem('renov_app_state', JSON.stringify(appState));
-    render();
-  }
+  // Écoute synchro
+  onSnapshot(doc(db, "config", "budget"), (docSnap) => {
+    if (docSnap.exists()) {
+      globalBudget = docSnap.data().amount || 0;
+      document.getElementById('globalBudgetInput').value = globalBudget;
+    }
+    updateUI();
+  });
 
-  function exportData() {
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
-    const downloadAnchor = document.createElement('a');
-    downloadAnchor.setAttribute("href", dataStr);
-    downloadAnchor.setAttribute("download", `sauvegarde_travaux_${new Date().toISOString().split('T')[0]}.json`);
-    document.body.appendChild(downloadAnchor);
-    downloadAnchor.click();
-    downloadAnchor.remove();
-  }
-
-  function renderProjectDropdown() {
-    const select = document.getElementById('projectSelect');
-    select.innerHTML = appState.projects.map(p => 
-      `<option value="${p.id}" ${p.id === appState.activeProjectId ? 'selected' : ''}>${p.name}</option>`
-    ).join('');
-  }
-
-  function switchProject() {
-    appState.activeProjectId = document.getElementById('projectSelect').value;
-    saveData();
-  }
-
-  function addNewProject() {
-    const name = prompt("Nom du nouveau projet :");
-    if (!name) return;
-    const credit = parseFloat(prompt("Montant du crédit souscrit (€) :", "0")) || 0;
+  onSnapshot(collection(db, "expenses"), (snapshot) => {
+    document.getElementById('syncDot').classList.add('status-online');
+    document.getElementById('syncText').textContent = "Synchronisé";
     
-    const newId = "proj_" + Date.now();
-    appState.projects.push({ id: newId, name: name, credit: credit, purchases: [] });
-    appState.activeProjectId = newId;
-    saveData();
-  }
-
-  function deleteCurrentProject() {
-    if (appState.projects.length <= 1) return alert("Vous devez garder au moins un projet.");
-    const project = getCurrentProject();
-    if (confirm(`Supprimer le projet "${project.name}" ?`)) {
-      appState.projects = appState.projects.filter(p => p.id !== project.id);
-      appState.activeProjectId = appState.projects[0].id;
-      saveData();
-    }
-  }
-
-  function updateCreditAmount() {
-    const project = getCurrentProject();
-    project.credit = parseFloat(document.getElementById('creditAmount').value) || 0;
-    saveData();
-  }
-
-  function updateDatalists() {
-    const project = getCurrentProject();
-    const descList = document.getElementById('descriptionSuggestions');
-    const compList = document.getElementById('companySuggestions');
-
-    descList.innerHTML = [...new Set(project.purchases.map(p => p.name))].map(d => `<option value="${d}">`).join('');
-    compList.innerHTML = [...new Set(project.purchases.map(p => p.company).filter(Boolean))].map(c => `<option value="${c}">`).join('');
-  }
-
-  function renderTable() {
-    const project = getCurrentProject();
-    const tbody = document.getElementById('purchasesTable');
-    const searchTerm = (document.getElementById('searchInput')?.value || '').toLowerCase();
-    tbody.innerHTML = '';
-
-    // Tri automatique par date (du plus récent au plus ancien)
-    const sortedPurchases = [...project.purchases].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    const filteredPurchases = sortedPurchases.filter(p => 
-      p.name.toLowerCase().includes(searchTerm) || 
-      (p.company && p.company.toLowerCase().includes(searchTerm))
-    );
-
-    let filteredTotalNet = 0;
-
-    filteredPurchases.forEach(p => {
-      const netTotal = p.total - p.refund;
-      filteredTotalNet += netTotal;
-      const remaining = p.fullPaid ? 0 : Math.max(0, netTotal - p.deposit);
-      const isPaid = p.fullPaid || remaining <= 0.001;
-
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td><strong>${p.name}</strong><br><small style="color:#6b7280">${p.date}</small></td>
-        <td>${p.company || '—'}</td>
-        <td>${p.deposit > 0 ? p.deposit.toFixed(2) + ' €' + (p.depositPaid ? '<br><small class="text-green">✓ Payé</small>' : '') : '0,00 €'}</td>
-        <td>${p.total.toFixed(2)} €</td>
-        <td>${p.refund > 0 ? p.refund.toFixed(2) + ' €' + (p.refundDetail ? '<br><small style="color:#6b7280">' + p.refundDetail + '</small>' : '') : '0,00 €'}</td>
-        <td><strong>${netTotal.toFixed(2)} €</strong></td>
-        <td class="${remaining > 0 ? 'text-orange' : ''}"><strong>${remaining.toFixed(2)} €</strong><br><small style="color:#6b7280">${remaining > 0 ? '⏳ À payer' : '✓ Payé'}</small></td>
-        <td><span class="badge ${isPaid ? 'badge-paid' : 'badge-pending'}">${isPaid ? 'Acquittée' : 'En attente'}</span></td>
-        <td>
-          <button style="background:none;" onclick="openModal(${p.id})">✏️</button>
-          <button style="color:red; background:none;" onclick="deletePurchase(${p.id})">🗑️</button>
-        </td>
-      `;
-      tbody.appendChild(tr);
+    items = [];
+    snapshot.forEach((doc) => {
+      items.push({ id: doc.id, ...doc.data() });
     });
+    updateUI();
+  });
 
-    // Affichage du sous-total dynamique lors de la recherche
-    const summaryElem = document.getElementById('searchSummary');
-    if (searchTerm) {
-      summaryElem.innerText = `${filteredPurchases.length} achat(s) trouvé(s) — Total net : ${filteredTotalNet.toFixed(2)} €`;
-    } else {
-      summaryElem.innerText = `${filteredPurchases.length} achat(s) au total`;
-    }
-  }
+  window.saveBudget = async function() {
+    const val = parseFloat(document.getElementById('globalBudgetInput').value) || 0;
+    await setDoc(doc(db, "config", "budget"), { amount: val });
+  };
 
-  function updateCalculations() {
-    const project = getCurrentProject();
-    document.getElementById('creditAmount').value = project.credit;
-
-    let totalInvoices = 0;
-    let totalDeposits = 0;
-    let totalRefunds = 0;
-    let totalRemaining = 0;
-
-    project.purchases.forEach(p => {
-      totalInvoices += p.total;
-      totalDeposits += p.deposit;
-      totalRefunds += p.refund;
-      
-      const netTotal = p.total - p.refund;
-      const rem = p.fullPaid ? 0 : Math.max(0, netTotal - p.deposit);
-      totalRemaining += rem;
-    });
-
-    const totalSpent = totalInvoices - totalRefunds;
-    const creditRemaining = project.credit - totalSpent;
-
-    document.getElementById('totalSpent').innerText = totalSpent.toFixed(2) + ' €';
-    document.getElementById('creditRemaining').innerText = creditRemaining.toFixed(2) + ' €';
-    document.getElementById('totalInvoices').innerText = totalInvoices.toFixed(2) + ' €';
-    document.getElementById('totalDeposits').innerText = totalDeposits.toFixed(2) + ' €';
-    document.getElementById('totalRemaining').innerText = totalRemaining.toFixed(2) + ' €';
-    document.getElementById('totalRefunds').innerText = totalRefunds.toFixed(2) + ' €';
-  }
-
-  function openModal(id = null) {
-    editingPurchaseId = id;
-    const project = getCurrentProject();
-    updateDatalists();
-
-    if (id) {
-      const p = project.purchases.find(item => item.id === id);
-      document.getElementById('modalTitle').innerText = "Modifier l'achat";
-      document.getElementById('itemName').value = p.name;
-      document.getElementById('itemCompany').value = p.company;
-      document.getElementById('itemTotal').value = p.total;
-      document.getElementById('itemDeposit').value = p.deposit;
-      document.getElementById('itemDepositPaid').checked = p.depositPaid || false;
-      document.getElementById('itemRefund').value = p.refund;
-      document.getElementById('itemRefundDetail').value = p.refundDetail || '';
-      document.getElementById('itemFullPaid').checked = p.fullPaid || false;
-      document.getElementById('itemDate').value = p.date;
-    } else {
-      document.getElementById('modalTitle').innerText = "Ajouter un achat";
-      document.getElementById('itemName').value = '';
-      document.getElementById('itemCompany').value = '';
-      document.getElementById('itemTotal').value = '0';
-      document.getElementById('itemDeposit').value = '0';
-      document.getElementById('itemDepositPaid').checked = false;
-      document.getElementById('itemRefund').value = '0';
-      document.getElementById('itemRefundDetail').value = '';
-      document.getElementById('itemFullPaid').checked = false;
-      document.getElementById('itemDate').value = new Date().toISOString().split('T')[0];
-    }
-
-    document.getElementById('purchaseModal').style.display = 'flex';
-  }
-
-  function closeModal() { document.getElementById('purchaseModal').style.display = 'none'; }
-
-  function savePurchase() {
+  document.getElementById('addForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
     const name = document.getElementById('itemName').value;
-    if (!name) return alert('Veuillez entrer une description');
+    const category = document.getElementById('itemCategory').value;
+    const amount = parseFloat(document.getElementById('itemAmount').value) || 0;
+    const type = document.getElementById('itemType').value;
 
-    const project = getCurrentProject();
+    await addDoc(collection(db, "expenses"), {
+      name, category, amount, type, date: new Date().toISOString()
+    });
 
-    const purchaseData = {
-      id: editingPurchaseId || Date.now(),
-      name: name,
-      company: document.getElementById('itemCompany').value,
-      total: parseFloat(document.getElementById('itemTotal').value) || 0,
-      deposit: parseFloat(document.getElementById('itemDeposit').value) || 0,
-      depositPaid: document.getElementById('itemDepositPaid').checked,
-      refund: parseFloat(document.getElementById('itemRefund').value) || 0,
-      refundDetail: document.getElementById('itemRefundDetail').value,
-      fullPaid: document.getElementById('itemFullPaid').checked,
-      date: document.getElementById('itemDate').value || new Date().toISOString().split('T')[0]
-    };
+    document.getElementById('addForm').reset();
+  });
 
-    if (editingPurchaseId) {
-      const index = project.purchases.findIndex(p => p.id === editingPurchaseId);
-      project.purchases[index] = purchaseData;
-    } else {
-      project.purchases.push(purchaseData);
-    }
+  window.deleteItem = async function(id) {
+    await deleteDoc(doc(db, "expenses", id));
+  };
 
-    saveData();
-    closeModal();
+  function updateUI() {
+    const listEl = document.getElementById('itemList');
+    listEl.innerHTML = '';
+
+    let totalReal = 0;
+
+    items.forEach(item => {
+      if (item.type === 'reelle') totalReal += item.amount;
+
+      const li = document.createElement('li');
+      li.className = 'item-card';
+      li.innerHTML = `
+        <div class="item-info">
+          <strong>${item.name}</strong>
+          <small>${item.category}</small><br>
+          <span class="badge ${item.type === 'reelle' ? 'badge-reelle' : 'badge-estimee'}">
+            ${item.type === 'reelle' ? 'Dépense réelle' : 'Estimation'}
+          </span>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-weight:bold; font-size:1rem;">${item.amount.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}</div>
+          <button class="btn-danger btn-sm" style="margin-top:5px;" onclick="deleteItem('${item.id}')">Supprimer</button>
+        </div>
+      `;
+      listEl.appendChild(li);
+    });
+
+    document.getElementById('statBudget').textContent = globalBudget.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+    document.getElementById('statReal').textContent = totalReal.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+    
+    const remaining = globalBudget - totalReal;
+    document.getElementById('statRemaining').textContent = remaining.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+
+    const pct = globalBudget > 0 ? Math.min((totalReal / globalBudget) * 100, 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
   }
-
-  function deletePurchase(id) {
-    const project = getCurrentProject();
-    project.purchases = project.purchases.filter(p => p.id !== id);
-    saveData();
-  }
-
-  function render() {
-    renderProjectDropdown();
-    renderTable();
-    updateCalculations();
-  }
-
-  render();
 </script>
+
 </body>
 </html>
